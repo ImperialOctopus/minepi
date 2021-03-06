@@ -23,7 +23,7 @@ class MeinHausApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Mein Haus Monitor',
         theme: themeData,
-        //debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         navigatorKey: MeinHausApp.navigatorKey,
         initialRoute: '/',
         routes: routes,
