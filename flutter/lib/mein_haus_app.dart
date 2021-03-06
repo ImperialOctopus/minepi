@@ -67,8 +67,15 @@ class _BlocProviderState extends State<_BlocProvider> {
     // Bloc providers
     return RepositoryProvider.value(
       value: _dataRepository,
-      child: BlocProvider<AuthenticationBloc>.value(
-        value: _authBloc,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthenticationBloc>.value(
+            value: _authBloc,
+          ),
+          BlocProvider<RememberBloc>.value(
+            value: _rememberBloc,
+          ),
+        ],
         child: BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
             if (state is AuthenticationAuthenticated) {
