@@ -14,9 +14,10 @@ class MonitorListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.asset('/assets/dyes/' + color + '_dye.png'),
+      leading: Image.asset('assets/dyes/' + color + '_dye.png'),
       title: Text(color),
       trailing: Text(value == 0 ? '' : value.toString()),
+      //dense: true,
     );
   }
 }
