@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'routes/bloc/key/key_bloc.dart';
+import 'routes/bloc/key/key_event.dart';
 import 'routes/routes.dart';
 import 'theme/theme.dart';
 
@@ -11,7 +14,7 @@ class MeinHausApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hexal Flutter',
+      title: 'Mein Haus Monitor',
       theme: themeData,
       //debugShowCheckedModeBanner: false,
       builder: (context, widget) => _BlocProvider(child: widget),
@@ -31,15 +34,21 @@ class _BlocProvider extends StatefulWidget {
 }
 
 class _BlocProviderState extends State<_BlocProvider> {
+  late final KeyBloc _keyBloc;
+
   @override
   void initState() {
     super.initState();
     // Initialise blocs.
+    _keyBloc = KeyBloc()..add(KeyAppStarted());
   }
 
   @override
   Widget build(BuildContext context) {
     // Bloc providers
-    return widget.child ?? Container();
+    return BlocProvider<KeyBloc>.value(
+      value: _keyBloc,
+      child: widget.child ?? Container(),
+    );
   }
 }
