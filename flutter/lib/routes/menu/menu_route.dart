@@ -34,29 +34,42 @@ class _MenuRouteState extends State<MenuRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text('Menu'),
-          TextField(
-            controller: _textController,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Center(
+                  child: Text(
+                'MinePi Monitor',
+                style: TextStyle(fontSize: 48),
+              )),
+              Container(height: 48),
+              TextField(
+                decoration: const InputDecoration(labelText: 'Identifier:'),
+                controller: _textController,
+              ),
+              ElevatedButton(
+                onPressed: () => BlocProvider.of<AuthenticationBloc>(context)
+                    .add(AuthenticationRequested(
+                        identifier: _textController.text)),
+                child: const Text('Submit'),
+              ),
+              BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                  builder: (context, state) {
+                if (state is AuthenticationLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (state is AuthenticationError) {
+                  return Text(state.message);
+                }
+                return Container();
+              }),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () => BlocProvider.of<AuthenticationBloc>(context)
-                .add(AuthenticationRequested(identifier: _textController.text)),
-            child: const Text('Submit'),
-          ),
-          BlocBuilder<AuthenticationBloc, AuthenticationState>(
-              builder: (context, state) {
-            if (state is AuthenticationLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (state is AuthenticationError) {
-              return Text(state.message);
-            }
-            return Container();
-          }),
-        ],
+        ),
       ),
     );
   }
