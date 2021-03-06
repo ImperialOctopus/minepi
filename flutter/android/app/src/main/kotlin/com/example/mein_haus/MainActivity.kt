@@ -1,4 +1,4 @@
-package com.example.mein_haus
+package com.imperialoctopus.minepi
 
 import io.flutter.embedding.android.FlutterActivity
 
