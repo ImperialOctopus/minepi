@@ -1,5 +1,6 @@
-package com.imperialoctopus.meinhaus;
+package com.imperialoctopus.meinhaus.blockredstone;
 
+import com.imperialoctopus.meinhaus.MeinHaus;
 import net.minecraftforge.eventbus.api.IEventBus;
 
 /*

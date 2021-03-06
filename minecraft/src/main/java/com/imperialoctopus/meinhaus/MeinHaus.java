@@ -1,5 +1,6 @@
 package com.imperialoctopus.meinhaus;
 
+import com.imperialoctopus.meinhaus.blockredstone.StartupCommon;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,6 +17,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -56,11 +58,13 @@ public class MeinHaus
 //        final ClientSideOnlyModEventRegistrar clientSideOnlyModEventRegistrar = new ClientSideOnlyModEventRegistrar(modEventBus);
 
 
-        public void registerCommonEvents(IEventBus eventBus) {
-            eventBus.register(StartupCommon.class);
-        }
+        registerCommonEvents(modEventBus);
 
 
+    }
+
+    public void registerCommonEvents(IEventBus eventBus) {
+        eventBus.register(StartupCommon.class);
     }
 
     private void setup(final FMLCommonSetupEvent event)

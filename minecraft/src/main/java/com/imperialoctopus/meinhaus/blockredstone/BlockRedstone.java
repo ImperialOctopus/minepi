@@ -1,6 +1,6 @@
 // https://github.com/TheGreyGhost/MinecraftByExample
 
-package com.imperialoctopus.meinhaus;
+package com.imperialoctopus.meinhaus.blockredstone;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,6 +12,21 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.material.Material;
+
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.IntegerProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IWorld;
+
+
+
 import javax.annotation.Nullable;
 
 public class BlockRedstone extends Block {
@@ -19,6 +34,10 @@ public class BlockRedstone extends Block {
     // What are its properties?
     public BlockRedstone(Properties properties) {
         super(properties);
+    }
+
+    public BlockRedstone() {
+
     }
 
     /**
