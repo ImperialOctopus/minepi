@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/key/key_bloc.dart';
 import 'bloc/key/key_event.dart';
 import 'bloc/key/key_state.dart';
-import 'routes/routes.dart';
+import 'routes/menu/menu_route.dart';
+import 'routes/monitor/monitor_route.dart';
 import 'theme/theme.dart';
 
 /// Main app widget.
@@ -28,10 +29,19 @@ class MeinHausApp extends StatelessWidget {
           return BlocListener<KeyBloc, KeyState>(
             listener: (context, state) {
               if (state is KeyUnloaded) {
-                _navigator.pushNamedAndRemoveUntil('/', (route) => false);
+                _navigator.pushAndRemoveUntil(
+                    MaterialPageRoute<void>(
+                      builder: (context) => const MenuRoute(),
+                    ),
+                    (route) => false);
               } else if (state is KeyLoaded) {
-                _navigator.pushNamedAndRemoveUntil(
-                    '/monitor', (route) => false);
+                _navigator.pushAndRemoveUntil(
+                    MaterialPageRoute<void>(
+                      builder: (context) => MonitorRoute(
+                        loginKey: state.loginKey,
+                      ),
+                    ),
+                    (route) => false);
               } else {
                 throw FallThroughError();
               }
@@ -39,8 +49,8 @@ class MeinHausApp extends StatelessWidget {
             child: widget,
           );
         },
-        initialRoute: '/',
-        routes: routes,
+        onGenerateRoute: (_) =>
+            MaterialPageRoute<void>(builder: (context) => const MenuRoute()),
       ),
     );
   }
@@ -62,7 +72,7 @@ class _BlocProviderState extends State<_BlocProvider> {
   void initState() {
     super.initState();
     // Initialise blocs.
-    _keyBloc = KeyBloc()..add(KeyAppStarted());
+    _keyBloc = KeyBloc()..add(const KeyAppStarted());
   }
 
   @override
