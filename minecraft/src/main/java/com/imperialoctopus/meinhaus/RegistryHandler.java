@@ -35,6 +35,8 @@ public class RegistryHandler {
             )
     );
 
+
+
     // register item
     public static final RegistryObject<Item> COPPER = ITEMS.register("copper", () ->
             new Item(

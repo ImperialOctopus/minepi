@@ -5,7 +5,7 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:block",
+          "type": "minecraft:item",
           "name": "meinhaus:copper_ore"
         }
       ]
