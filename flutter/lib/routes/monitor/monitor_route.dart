@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc/monitor_bloc.dart';
+
+/// Route for monitor page.
 class MonitorRoute extends StatelessWidget {
-  const MonitorRoute();
+  /// Login key.
+  final String loginKey;
+
+  /// Route for monitor page.
+  const MonitorRoute({required this.loginKey});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return BlocProvider(
+      create: (context) => MonitorBloc(loginKey: loginKey),
+      child: Container(),
+    );
   }
 }
