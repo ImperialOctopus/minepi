@@ -31,8 +31,11 @@ class AuthenticationBloc
       AuthenticationRequested event) async* {
     yield const AuthenticationLoading();
     try {
-      await _dataRepository.checkUser(event.identifier);
-      yield AuthenticationAuthenticated(identifier: event.identifier);
+      if (await _dataRepository.checkUser(event.identifier)) {
+        yield AuthenticationAuthenticated(identifier: event.identifier);
+      } else {
+        yield const AuthenticationError(message: 'Identifier not found!');
+      }
     } catch (e) {
       yield AuthenticationError(message: e.toString());
     }

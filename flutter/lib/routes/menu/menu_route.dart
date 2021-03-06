@@ -49,7 +49,7 @@ class _MenuRouteState extends State<MenuRoute> {
           BlocBuilder<AuthenticationBloc, AuthenticationState>(
               builder: (context, state) {
             if (state is AuthenticationLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
             if (state is AuthenticationError) {
               return Text(state.message);
