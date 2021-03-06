@@ -3,11 +3,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../model/output_state.dart';
 import 'bloc/monitor_cubit.dart';
+import 'component/monitor_list_item.dart';
 
 /// Page for monitor.
 class MonitorPage extends StatelessWidget {
   /// Page for monitor.
   const MonitorPage();
+
+  /// Minecraft wool colours.
+  static const List<String> colours = [
+    'white',
+    'orange',
+    'magenta',
+    'light_blue',
+    'yellow',
+    'lime',
+    'pink',
+    'grey',
+    'light_grey',
+    'cyan',
+    'purple',
+    'blue',
+    'brown',
+    'green',
+    'red',
+    'black',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +41,12 @@ class MonitorPage extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else {
-            return Center(child: Text(state.toString()));
+            return ListView(
+              children: colours
+                  .map((color) => MonitorListItem(
+                      color: color, value: state.data[color] ?? 0))
+                  .toList(),
+            );
           }
         },
       ),
