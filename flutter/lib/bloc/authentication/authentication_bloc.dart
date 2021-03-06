@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mein_haus/repository/data_repository/data_repository.dart';
 
+import '../../repository/data_repository/data_repository.dart';
 import 'authentication_event.dart';
 import 'authentication_state.dart';
 
