@@ -28,8 +28,10 @@ class MeinHausApp extends StatelessWidget {
           return BlocListener<KeyBloc, KeyState>(
             listener: (context, state) {
               if (state is KeyUnloaded) {
+                _navigator.pushNamedAndRemoveUntil('/', (route) => false);
               } else if (state is KeyLoaded) {
-          _navigator.pushNamedAndRemoveUntil(newRouteName, (route) => false)
+                _navigator.pushNamedAndRemoveUntil(
+                    '/monitor', (route) => false);
               } else {
                 throw FallThroughError();
               }
