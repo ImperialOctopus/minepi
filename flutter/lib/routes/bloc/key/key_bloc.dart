@@ -5,7 +5,7 @@ import 'key_event.dart';
 import 'key_state.dart';
 
 class KeyBloc extends Bloc<KeyEvent, KeyState> {
-  KeyBloc() : super(const KeyInitial());
+  KeyBloc() : super(const KeyUnloaded());
 
   @override
   Stream<KeyState> mapEventToState(
