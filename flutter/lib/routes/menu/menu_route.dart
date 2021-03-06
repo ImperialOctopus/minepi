@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/authentication/authentication_bloc.dart';
 import '../../bloc/authentication/authentication_event.dart';
+import '../../bloc/authentication/authentication_state.dart';
 
 /// Route for menu page.
 class MenuRoute extends StatefulWidget {
@@ -32,18 +33,31 @@ class _MenuRouteState extends State<MenuRoute> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text('Menu'),
-        TextField(
-          controller: _textController,
-        ),
-        ElevatedButton(
-          onPressed: () => BlocProvider.of<AuthenticationBloc>(context)
-              .add(AuthenticationRequested(identifier: _textController.text)),
-          child: const Text('Submit'),
-        )
-      ],
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Text('Menu'),
+          TextField(
+            controller: _textController,
+          ),
+          ElevatedButton(
+            onPressed: () => BlocProvider.of<AuthenticationBloc>(context)
+                .add(AuthenticationRequested(identifier: _textController.text)),
+            child: const Text('Submit'),
+          ),
+          BlocBuilder<AuthenticationBloc, AuthenticationState>(
+              builder: (context, state) {
+            if (state is AuthenticationLoading) {
+              return Center(child: CircularProgressIndicator());
+            }
+            if (state is AuthenticationError) {
+              return Text(state.message);
+            }
+            return Container();
+          }),
+        ],
+      ),
     );
   }
 }
