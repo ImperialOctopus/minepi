@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/authentication/authentication_bloc.dart';
 import '../../bloc/authentication/authentication_event.dart';
 import '../../bloc/authentication/authentication_state.dart';
+import '../../bloc/remember/remember_bloc.dart';
+import '../../bloc/remember/remember_state.dart';
 
 /// Route for menu page.
 class MenuRoute extends StatefulWidget {
@@ -51,11 +53,21 @@ class _MenuRouteState extends State<MenuRoute> {
                 decoration: const InputDecoration(labelText: 'Identifier:'),
                 controller: _textController,
               ),
+              Container(height: 8),
               ElevatedButton(
                 onPressed: () => BlocProvider.of<AuthenticationBloc>(context)
                     .add(AuthenticationRequested(
                         identifier: _textController.text)),
                 child: const Text('Submit'),
+              ),
+              BlocBuilder<RememberBloc, RememberState>(
+                builder: (context, state) => ElevatedButton(
+                  onPressed: (state is RememberFound)
+                      ? () => BlocProvider.of<AuthenticationBloc>(context).add(
+                          AuthenticationRequested(identifier: state.identifier))
+                      : null,
+                  child: const Text('Reconnect'),
+                ),
               ),
               BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {

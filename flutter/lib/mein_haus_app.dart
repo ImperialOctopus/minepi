@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/authentication/authentication_bloc.dart';
 import 'bloc/authentication/authentication_event.dart';
 import 'bloc/authentication/authentication_state.dart';
+import 'bloc/remember/remember_bloc.dart';
+import 'bloc/remember/remember_event.dart';
 import 'repository/data_repository/data_repository.dart';
 import 'repository/data_repository/firebase_data_repository.dart';
 import 'routes/routes.dart';
@@ -45,6 +47,7 @@ class _BlocProvider extends StatefulWidget {
 class _BlocProviderState extends State<_BlocProvider> {
   late final DataRepository _dataRepository;
 
+  late final RememberBloc _rememberBloc;
   late final AuthenticationBloc _authBloc;
 
   @override
@@ -53,7 +56,9 @@ class _BlocProviderState extends State<_BlocProvider> {
     // Initialise blocs.
     _dataRepository = FirebaseDataRepository();
 
-    _authBloc = AuthenticationBloc(dataRepository: _dataRepository)
+    _rememberBloc = RememberBloc()..add(const RememberAppStarted());
+    _authBloc = AuthenticationBloc(
+        dataRepository: _dataRepository, rememberBloc: _rememberBloc)
       ..add(const AuthenticationAppStarted());
   }
 
