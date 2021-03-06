@@ -66,7 +66,9 @@ class _MenuRouteState extends State<MenuRoute> {
                       ? () => BlocProvider.of<AuthenticationBloc>(context).add(
                           AuthenticationRequested(identifier: state.identifier))
                       : null,
-                  child: const Text('Reconnect'),
+                  child: Text((state is RememberFound)
+                      ? 'Reconnect: ' + state.identifier
+                      : 'Reconnect'),
                 ),
               ),
               BlocBuilder<AuthenticationBloc, AuthenticationState>(
