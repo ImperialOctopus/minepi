@@ -94,24 +94,26 @@ class _MonitorPageState extends State<MonitorPage> {
           ),
         ],
       ),
-      body: BlocBuilder<MonitorCubit, OutputState?>(
-        builder: (context, state) {
-          if (state == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return ListView(
-              children: <String, int>{
-                for (final colour in _sortedList(state.data))
-                  colour: state.data[colour] ?? 0
-              }
-                  .mapToIterable((color, value) =>
-                      MonitorListItem(color: color, value: value))
-                  .toList(),
-            );
-          }
-        },
+      body: SafeArea(
+        child: BlocBuilder<MonitorCubit, OutputState?>(
+          builder: (context, state) {
+            if (state == null) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              return ListView(
+                children: <String, int>{
+                  for (final colour in _sortedList(state.data))
+                    colour: state.data[colour] ?? 0
+                }
+                    .mapToIterable((color, value) =>
+                        MonitorListItem(color: color, value: value))
+                    .toList(),
+              );
+            }
+          },
+        ),
       ),
     );
   }
