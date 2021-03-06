@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/authentication/authentication_bloc.dart';
+import '../../bloc/authentication/authentication_event.dart';
+
 /// Route for menu page.
 class MenuRoute extends StatefulWidget {
   /// Route for menu page.
@@ -36,8 +39,8 @@ class _MenuRouteState extends State<MenuRoute> {
           controller: _textController,
         ),
         ElevatedButton(
-          onPressed: () => BlocProvider.of<KeyBloc>(context)
-              .add(KeySubmitted(loginKey: _textController.text)),
+          onPressed: () => BlocProvider.of<AuthenticationBloc>(context)
+              .add(AuthenticationRequested(identifier: _textController.text)),
           child: const Text('Submit'),
         )
       ],

@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/key/key_bloc.dart';
-import 'bloc/key/key_event.dart';
-import 'bloc/key/key_state.dart';
-import 'routes/menu/menu_route.dart';
-import 'routes/monitor/monitor_route.dart';
+import 'bloc/authentication/authentication_bloc.dart';
+import 'bloc/authentication/authentication_event.dart';
+import 'bloc/authentication/authentication_state.dart';
+import 'repository/data_repository/data_repository.dart';
+import 'repository/data_repository/firebase_data_repository.dart';
+import 'routes/routes.dart';
 import 'theme/theme.dart';
 
 /// Main app widget.
 class MeinHausApp extends StatelessWidget {
   /// Main app widget.
   MeinHausApp();
-
-  final _navigatorKey = GlobalKey<NavigatorState>();
-
-  NavigatorState get _navigator => _navigatorKey.currentState!;
 
   @override
   Widget build(BuildContext context) {
@@ -24,33 +21,9 @@ class MeinHausApp extends StatelessWidget {
         title: 'Mein Haus Monitor',
         theme: themeData,
         //debugShowCheckedModeBanner: false,
-        navigatorKey: _navigatorKey,
-        builder: (context, widget) {
-          return BlocListener<KeyBloc, KeyState>(
-            listener: (context, state) {
-              if (state is KeyUnloaded) {
-                _navigator.pushAndRemoveUntil(
-                    MaterialPageRoute<void>(
-                      builder: (context) => const MenuRoute(),
-                    ),
-                    (route) => false);
-              } else if (state is KeyLoaded) {
-                _navigator.pushAndRemoveUntil(
-                    MaterialPageRoute<void>(
-                      builder: (context) => MonitorRoute(
-                        loginKey: state.loginKey,
-                      ),
-                    ),
-                    (route) => false);
-              } else {
-                throw FallThroughError();
-              }
-            },
-            child: widget,
-          );
-        },
-        onGenerateRoute: (_) =>
-            MaterialPageRoute<void>(builder: (context) => const MenuRoute()),
+        initialRoute: '/',
+        routes: routes,
+        builder: (context, widget) => _BlocProvider(child: widget),
       ),
     );
   }
@@ -66,21 +39,36 @@ class _BlocProvider extends StatefulWidget {
 }
 
 class _BlocProviderState extends State<_BlocProvider> {
-  late final KeyBloc _keyBloc;
+  late final DataRepository _dataRepository;
+
+  late final AuthenticationBloc _authBloc;
 
   @override
   void initState() {
     super.initState();
     // Initialise blocs.
-    _keyBloc = KeyBloc()..add(const KeyAppStarted());
+    _dataRepository = FirebaseDataRepository();
+
+    _authBloc = AuthenticationBloc(dataRepository: _dataRepository)
+      ..add(const AuthenticationAppStarted());
   }
 
   @override
   Widget build(BuildContext context) {
     // Bloc providers
-    return BlocProvider<KeyBloc>.value(
-      value: _keyBloc,
-      child: widget.child ?? Container(),
+    return RepositoryProvider.value(
+      value: _dataRepository,
+      child: BlocProvider<AuthenticationBloc>.value(
+        value: _authBloc,
+        child: BlocListener<AuthenticationBloc, AuthenticationState>(
+          listener: (context, state) {
+            if (state is AuthenticationAuthenticated) {
+              Navigator.of(context).pushNamed('/monitor');
+            }
+          },
+          child: widget.child,
+        ),
+      ),
     );
   }
 }
