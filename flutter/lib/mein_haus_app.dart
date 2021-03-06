@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'routes/bloc/key/key_bloc.dart';
 import 'routes/bloc/key/key_event.dart';
+import 'routes/bloc/key/key_state.dart';
 import 'routes/routes.dart';
 import 'theme/theme.dart';
 
@@ -11,15 +12,34 @@ class MeinHausApp extends StatelessWidget {
   /// Main app widget.
   MeinHausApp();
 
+  final _navigatorKey = GlobalKey<NavigatorState>();
+
+  NavigatorState get _navigator => _navigatorKey.currentState!;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Mein Haus Monitor',
-      theme: themeData,
-      //debugShowCheckedModeBanner: false,
-      builder: (context, widget) => _BlocProvider(child: widget),
-      initialRoute: '/',
-      routes: routes,
+    return _BlocProvider(
+      child: MaterialApp(
+        title: 'Mein Haus Monitor',
+        theme: themeData,
+        //debugShowCheckedModeBanner: false,
+        navigatorKey: _navigatorKey,
+        builder: (context, widget) {
+          return BlocListener<KeyBloc, KeyState>(
+            listener: (context, state) {
+              if (state is KeyUnloaded) {
+              } else if (state is KeyLoaded) {
+          _navigator.pushNamedAndRemoveUntil(newRouteName, (route) => false)
+              } else {
+                throw FallThroughError();
+              }
+            },
+            child: widget,
+          );
+        },
+        initialRoute: '/',
+        routes: routes,
+      ),
     );
   }
 }
