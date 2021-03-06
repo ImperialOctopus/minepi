@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'routes/bloc/key/key_bloc.dart';
-import 'routes/bloc/key/key_event.dart';
-import 'routes/bloc/key/key_state.dart';
+import 'bloc/key/key_bloc.dart';
+import 'bloc/key/key_event.dart';
+import 'bloc/key/key_state.dart';
 import 'routes/routes.dart';
 import 'theme/theme.dart';
 
