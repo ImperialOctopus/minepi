@@ -1,5 +1,5 @@
-name: mein_haus
-description: A new Flutter project.
+name: minepi
+description: Flutter app that monitors a MinePi instance.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.

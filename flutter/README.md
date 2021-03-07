@@ -1,4 +1,4 @@
-# mein_haus
+# minepi
 
 A new Flutter project.
 
