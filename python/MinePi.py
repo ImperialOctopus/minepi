@@ -30,7 +30,9 @@ def get(username):
 
     if request.status_code != 200:
         raise Exception(
-            f"Error fetching player data, status code: {request.status_code}")
+            "Error fetching player data, status code: "
+            + str(request.status_code)
+        )
 
     if not 'fields' in request.json():
         return {}
