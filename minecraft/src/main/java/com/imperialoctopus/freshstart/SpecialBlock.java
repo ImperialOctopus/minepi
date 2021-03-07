@@ -150,15 +150,15 @@ public class SpecialBlock extends Block {
 
     void sendPowerLevel(int level) {
         try {
-            Map<String, String> docData = new HashMap<>();
-            docData.put(name, String.valueOf(level));
-            String fields = ParameterStringBuilder.getParamsString(docData);
+            String requestString = "{\n" +
+                    "  \"fields\": {\n" +
+                    "    \"" + name + "\": {\n" +
+                    "      \"integerValue\": \"" + level + "\"\n" +
+                    "    }\n" +
+                    "  }\n" +
+                    "}";
 
-            Map<String, String> request = new HashMap<>();
-            request.put("fields", fields);
-            String requestString = ParameterStringBuilder.getParamsString(request);
-
-            final String address = "https://firestore.googleapis.com/v1/projects/mine-pi/databases/(default)/documents/users/olicompsci/";
+            final String address = "https://firestore.googleapis.com/v1/projects/mine-pi/databases/(default)/documents/users/testuser/";
 
             URL url = new URL(address);
 
