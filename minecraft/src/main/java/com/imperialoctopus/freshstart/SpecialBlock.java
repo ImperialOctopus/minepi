@@ -75,6 +75,7 @@ public class SpecialBlock extends Block {
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
         BlockState newBlockState = getBlockStateFromInputs(worldIn, pos, state);
+        // Send update here.
         final int FLAGS = SetBlockStateFlag.get(SetBlockStateFlag.BLOCK_UPDATE, SetBlockStateFlag.SEND_TO_CLIENTS);
         worldIn.setBlockState(pos, newBlockState, FLAGS);
     }
@@ -88,6 +89,7 @@ public class SpecialBlock extends Block {
             boolean isMoving) {
         BlockState newBlockState = getBlockStateFromInputs(worldIn, pos, currentState);
         if (newBlockState != currentState) {
+            // Send update here.
             final int FLAGS = SetBlockStateFlag.get(SetBlockStateFlag.BLOCK_UPDATE, SetBlockStateFlag.SEND_TO_CLIENTS);
             worldIn.setBlockState(pos, newBlockState, FLAGS);
         }
@@ -131,8 +133,6 @@ public class SpecialBlock extends Block {
         final int power = world.getRedstonePowerFromNeighbors(pos);
 
         BlockState newBlockState = state.with(POWER_LEVEL, (int) power);
-
-        System.out.println(power);
 
         return newBlockState;
     }
