@@ -12,21 +12,21 @@ import 'routes/routes.dart';
 import 'theme/theme.dart';
 
 /// Main app widget.
-class MeinHausApp extends StatelessWidget {
+class MinePiApp extends StatelessWidget {
   /// Key for navigator.
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
   /// Main app widget.
-  MeinHausApp();
+  MinePiApp();
 
   @override
   Widget build(BuildContext context) {
     return _BlocProvider(
       child: MaterialApp(
-        title: 'Mein Haus Monitor',
+        title: 'MinePi Monitor',
         theme: themeData,
         debugShowCheckedModeBanner: false,
-        navigatorKey: MeinHausApp.navigatorKey,
+        navigatorKey: MinePiApp.navigatorKey,
         initialRoute: '/',
         routes: routes,
         builder: (context, widget) => _BlocProvider(child: widget),
@@ -79,7 +79,7 @@ class _BlocProviderState extends State<_BlocProvider> {
         child: BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
             if (state is AuthenticationAuthenticated) {
-              MeinHausApp.navigatorKey.currentState?.pushNamed('/monitor');
+              MinePiApp.navigatorKey.currentState?.pushNamed('/monitor');
             }
           },
           child: widget.child,

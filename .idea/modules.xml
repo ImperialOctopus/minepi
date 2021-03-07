@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/mein_haus.iml" filepath="$PROJECT_DIR$/.idea/mein_haus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/minepi.iml" filepath="$PROJECT_DIR$/.idea/minepi.iml" />
     </modules>
   </component>
 </project>
