@@ -41,7 +41,7 @@ while True:
 		time.sleep(1)
 		continue
 	
-	fields = x.json()['fields']
+	fields = request.json()['fields']
 
 	# Update LEDs to represent status
 	if "green" in fields and int(fields["green"]) > 0:
