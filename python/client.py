@@ -37,14 +37,14 @@ fields = x.json()['fields']
 print(fields)
 
 if "green" in fields and fields["green"] > 0:
-	GPIO.output(24,GPIO.HIGH)
+	GPIO.output(22,GPIO.HIGH)
 else
-	GPIO.output(24,GPIO.LOW)
+	GPIO.output(22,GPIO.LOW)
 	
 if "yellow" in fields and fields["yellow"] > 0:
-	GPIO.output(24,GPIO.HIGH)
+	GPIO.output(23,GPIO.HIGH)
 else
-	GPIO.output(24,GPIO.LOW)
+	GPIO.output(23,GPIO.LOW)
 
 if "red" in fields and fields["red"] > 0:
 	GPIO.output(24,GPIO.HIGH)
