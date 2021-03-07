@@ -27,9 +27,8 @@ GPIO.output(24,GPIO.LOW)
 username = sys.argv[1]
 
 # Poll server once per second
+print("Polling")
 while True:
-	print("Polling")
-	
 	# Get player data
 	request = requests.get("https://firestore.googleapis.com/v1/projects/mine-pi/databases/(default)/documents/users/" + username)
 
@@ -38,7 +37,6 @@ while True:
 	  exit()
 
 	if not 'fields' in request.json():
-		time.sleep(1)
 		continue
 	
 	fields = request.json()['fields']
@@ -58,5 +56,3 @@ while True:
 		GPIO.output(24,GPIO.HIGH)
 	else:
 		GPIO.output(24,GPIO.LOW)
-
-	time.sleep(1)
