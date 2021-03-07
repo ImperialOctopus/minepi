@@ -1,7 +1,14 @@
 package com.imperialoctopus.freshstart;
 
+import java.io.DataOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Nullable;
 
+import com.imperialoctopus.extension.ParameterStringBuilder;
 import com.imperialoctopus.extension.SetBlockStateFlag;
 
 import net.minecraft.block.Block;
@@ -21,6 +28,8 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 
 public class SpecialBlock extends Block {
 
+    private final String name;
+
     /**
      * private static final Direction DOWN = Direction.DOWN; private static final
      * Direction WEST = Direction.WEST; private static final Direction EAST =
@@ -28,8 +37,9 @@ public class SpecialBlock extends Block {
      * private static final Direction SOUTH = Direction.SOUTH;
      */
 
-    public SpecialBlock(Properties properties) {
+    public SpecialBlock(String name, Properties properties) {
         super(properties);
+        this.name = name;
     }
 
     /**
@@ -75,7 +85,7 @@ public class SpecialBlock extends Block {
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
         BlockState newBlockState = getBlockStateFromInputs(worldIn, pos, state);
-        // Send update here.
+        sendPowerLevel(newBlockState.get(POWER_LEVEL));
         final int FLAGS = SetBlockStateFlag.get(SetBlockStateFlag.BLOCK_UPDATE, SetBlockStateFlag.SEND_TO_CLIENTS);
         worldIn.setBlockState(pos, newBlockState, FLAGS);
     }
@@ -90,6 +100,7 @@ public class SpecialBlock extends Block {
         BlockState newBlockState = getBlockStateFromInputs(worldIn, pos, currentState);
         if (newBlockState != currentState) {
             // Send update here.
+            sendPowerLevel(newBlockState.get(POWER_LEVEL));
             final int FLAGS = SetBlockStateFlag.get(SetBlockStateFlag.BLOCK_UPDATE, SetBlockStateFlag.SEND_TO_CLIENTS);
             worldIn.setBlockState(pos, newBlockState, FLAGS);
         }
@@ -135,5 +146,42 @@ public class SpecialBlock extends Block {
         BlockState newBlockState = state.with(POWER_LEVEL, (int) power);
 
         return newBlockState;
+    }
+
+    void sendPowerLevel(int level) {
+        try {
+            Map<String, String> docData = new HashMap<>();
+            docData.put(name, String.valueOf(level));
+            String fields = ParameterStringBuilder.getParamsString(docData);
+
+            Map<String, String> request = new HashMap<>();
+            request.put("fields", fields);
+            String requestString = ParameterStringBuilder.getParamsString(request);
+
+            final String address = "https://firestore.googleapis.com/v1/projects/mine-pi/databases/(default)/documents/users/olicompsci/";
+
+            URL url = new URL(address);
+
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+            con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
+            con.setRequestMethod("POST");
+
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setDoOutput(true);
+
+            DataOutputStream out = new DataOutputStream(con.getOutputStream());
+
+            out.writeBytes(requestString);
+
+            System.out.println(con.getResponseCode());
+
+            out.flush();
+            out.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
     }
 }

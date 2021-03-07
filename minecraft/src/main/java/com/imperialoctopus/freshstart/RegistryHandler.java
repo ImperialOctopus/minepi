@@ -11,8 +11,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.rmi.registry.Registry;
-
 public class RegistryHandler {
         // create DeferredRegister objects
         public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
@@ -28,19 +26,19 @@ public class RegistryHandler {
 
         // register blocks
         public static final RegistryObject<SpecialBlock> PI_BLOCK = BLOCKS.register("pi_block",
-                        () -> new SpecialBlock(SpecialBlock.Properties.create(Material.IRON)
+                        () -> new SpecialBlock("green", SpecialBlock.Properties.create(Material.IRON)
                                         .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS)));
 
         public static final RegistryObject<SpecialBlock> RED_BLOCK = BLOCKS.register("red_block",
-                        () -> new SpecialBlock((SpecialBlock.Properties.create(Material.IRON)
+                        () -> new SpecialBlock("green", (SpecialBlock.Properties.create(Material.IRON)
                                         .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS))));
 
         public static final RegistryObject<SpecialBlock> GREEN_BLOCK = BLOCKS.register("green_block",
-                        () -> new SpecialBlock((SpecialBlock.Properties.create(Material.IRON)
+                        () -> new SpecialBlock("green", (SpecialBlock.Properties.create(Material.IRON)
                                         .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS))));
 
         public static final RegistryObject<SpecialBlock> BLUE_BLOCK = BLOCKS.register("blue_block",
-                        () -> new SpecialBlock((SpecialBlock.Properties.create(Material.IRON)
+                        () -> new SpecialBlock("green", (SpecialBlock.Properties.create(Material.IRON)
                                         .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS))));
 
         // register items
