@@ -25,33 +25,26 @@ public class RegistryHandler {
         }
 
         // register blocks
-        public static final RegistryObject<SpecialBlock> PI_BLOCK = BLOCKS.register("pi_block",
-                        () -> new SpecialBlock("green", SpecialBlock.Properties.create(Material.IRON)
-                                        .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS)));
+        public static final RegistryObject<SpecialBlock> RED_BLOCK = BLOCKS.register("pi_block_red",
+                        () -> new SpecialBlock("red", (SpecialBlock.Properties.create(Material.IRON)
+                                        .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS))));
 
-        public static final RegistryObject<SpecialBlock> RED_BLOCK = BLOCKS.register("red_block",
+        public static final RegistryObject<SpecialBlock> GREEN_BLOCK = BLOCKS.register("pi_block_green",
                         () -> new SpecialBlock("green", (SpecialBlock.Properties.create(Material.IRON)
                                         .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS))));
 
-        public static final RegistryObject<SpecialBlock> GREEN_BLOCK = BLOCKS.register("green_block",
-                        () -> new SpecialBlock("green", (SpecialBlock.Properties.create(Material.IRON)
-                                        .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS))));
-
-        public static final RegistryObject<SpecialBlock> BLUE_BLOCK = BLOCKS.register("blue_block",
-                        () -> new SpecialBlock("green", (SpecialBlock.Properties.create(Material.IRON)
+        public static final RegistryObject<SpecialBlock> YELLOW_BLOCK = BLOCKS.register("pi_block_yellow",
+                        () -> new SpecialBlock("yellow", (SpecialBlock.Properties.create(Material.IRON)
                                         .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS))));
 
         // register items
-        public static final RegistryObject<Item> PI_BLOCK_ITEM = ITEMS.register("pi_block",
-                        () -> new BlockItem(PI_BLOCK.get(), new Item.Properties().group(ItemGroup.REDSTONE)));
-
-        public static final RegistryObject<Item> RED_BLOCK_ITEM = ITEMS.register("red_block",
+        public static final RegistryObject<Item> RED_BLOCK_ITEM = ITEMS.register("pi_block_red",
                         () -> new BlockItem(RED_BLOCK.get(), new Item.Properties().group(ItemGroup.REDSTONE)));
 
-        public static final RegistryObject<Item> GREEN_BLOCK_ITEM = ITEMS.register("green_block",
+        public static final RegistryObject<Item> GREEN_BLOCK_ITEM = ITEMS.register("pi_block_green",
                         () -> new BlockItem(GREEN_BLOCK.get(), new Item.Properties().group(ItemGroup.REDSTONE)));
 
-        public static final RegistryObject<Item> BLUE_BLOCK_ITEM = ITEMS.register("blue_block",
-                        () -> new BlockItem(BLUE_BLOCK.get(), new Item.Properties().group(ItemGroup.REDSTONE)));
+        public static final RegistryObject<Item> YELLOW_BLOCK_ITEM = ITEMS.register("pi_block_yellow",
+                        () -> new BlockItem(YELLOW_BLOCK.get(), new Item.Properties().group(ItemGroup.REDSTONE)));
 
 }
