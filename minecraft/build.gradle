@@ -50,7 +50,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                freshstart {
+                minepi {
                     source sourceSets.main
                 }
             }
@@ -72,7 +72,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                freshstart {
+                minepi {
                     source sourceSets.main
                 }
             }
@@ -94,10 +94,10 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'freshstart', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'minepi', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                freshstart {
+                minepi {
                     source sourceSets.main
                 }
             }
@@ -141,7 +141,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "freshstart",
+            "Specification-Title": "minepi",
             "Specification-Vendor": "examplemodsareus",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,

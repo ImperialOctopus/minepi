@@ -1,4 +1,4 @@
-package com.imperialoctopus.freshstart;
+package com.imperialoctopus.minepi;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -14,9 +14,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class RegistryHandler {
         // create DeferredRegister objects
         public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
-                        FreshStart.MODID);
-        public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
-                        FreshStart.MODID);
+                        MinePi.MODID);
+        public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MinePi.MODID);
 
         public static void init() {
                 // attach DeferredRegister to the event bus

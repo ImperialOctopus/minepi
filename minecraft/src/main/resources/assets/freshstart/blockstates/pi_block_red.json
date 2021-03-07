@@ -1,10 +1,10 @@
 {
   "variants": {
     "lit=false": {
-      "model": "freshstart:block/pi_block_red"
+      "model": "minepi:block/pi_block_red"
     },
     "lit=true": {
-      "model": "freshstart:block/pi_block_red_powered"
+      "model": "minepi:block/pi_block_red_powered"
     }
   }
 }

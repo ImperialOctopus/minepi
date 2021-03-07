@@ -1,6 +1,6 @@
 {
-  "block.freshstart.pi_block_red": "MinePi Red",
-  "block.freshstart.pi_block_green": "MinePi Green",
-  "block.freshstart.pi_block_yellow": "MinePi Yellow",
-  "block.freshstart.pi_block_blue": "MinePi Blue"
+  "block.minepi.pi_block_red": "MinePi Red",
+  "block.minepi.pi_block_green": "MinePi Green",
+  "block.minepi.pi_block_yellow": "MinePi Yellow",
+  "block.minepi.pi_block_blue": "MinePi Blue"
 }
