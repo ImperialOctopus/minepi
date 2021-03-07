@@ -3,12 +3,9 @@ package com.imperialoctopus.freshstart;
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import com.imperialoctopus.extension.ParameterStringBuilder;
 import com.imperialoctopus.extension.SetBlockStateFlag;
 
 import net.minecraft.block.Block;
@@ -162,13 +159,8 @@ public class SpecialBlock extends Block {
 
     void sendPowerLevel(int level) {
         try {
-            String requestString = "{\n" +
-                    "  \"fields\": {\n" +
-                    "    \"" + name + "\": {\n" +
-                    "      \"integerValue\": \"" + level + "\"\n" +
-                    "    }\n" +
-                    "  }\n" +
-                    "}";
+            String requestString = "{\n" + "  \"fields\": {\n" + "    \"" + name + "\": {\n"
+                    + "      \"integerValue\": \"" + level + "\"\n" + "    }\n" + "  }\n" + "}";
 
             final String address = "https://firestore.googleapis.com/v1/projects/mine-pi/databases/(default)/documents/users/testuser/";
 
