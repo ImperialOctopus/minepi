@@ -6,6 +6,7 @@
     "east": "minepi:block/pi_side_red",
     "west": "minepi:block/pi_side_red",
     "north": "minepi:block/pi_side_red",
-    "south": "minepi:block/pi_side_red"
+    "south": "minepi:block/pi_side_red",
+    "particle": "minepi:block/pi_side_red"
   }
 }
