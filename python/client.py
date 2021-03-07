@@ -40,11 +40,11 @@ while True:
         GPIO.output(22, GPIO.LOW)
 
     if state[Channels.YELLOW] > 0:
-        GPIO.output(22, GPIO.HIGH)
+        GPIO.output(23, GPIO.HIGH)
     else:
-        GPIO.output(22, GPIO.LOW)
+        GPIO.output(23, GPIO.LOW)
 
     if state[Channels.RED] > 0:
-        GPIO.output(22, GPIO.HIGH)
+        GPIO.output(24, GPIO.HIGH)
     else:
-        GPIO.output(22, GPIO.LOW)
+        GPIO.output(24, GPIO.LOW)
