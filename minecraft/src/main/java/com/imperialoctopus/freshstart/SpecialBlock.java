@@ -2,6 +2,7 @@ package com.imperialoctopus.freshstart;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.util.Direction;

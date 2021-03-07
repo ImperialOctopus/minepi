@@ -13,6 +13,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.rmi.registry.Registry;
+
 public class RegistryHandler {
     // create DeferredRegister objects
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FreshStart.MODID);
@@ -25,7 +27,6 @@ public class RegistryHandler {
     }
 
 
-
     // register blocks
     public static final RegistryObject<SpecialBlock> PI_BLOCK = BLOCKS.register("pi_block", () ->
             new SpecialBlock(
@@ -36,6 +37,35 @@ public class RegistryHandler {
             )
     );
 
+    public static final RegistryObject<SpecialBlock>  RED_BLOCK = BLOCKS.register("red_block", () ->
+            new SpecialBlock((
+                    SpecialBlock.Properties
+                            .create(Material.IRON)
+                            .hardnessAndResistance(2.0f,10.0f)
+                            .sound(SoundType.GLASS)
+                    )
+            )
+    );
+
+    public static final RegistryObject<SpecialBlock>  GREEN_BLOCK = BLOCKS.register("green_block", () ->
+            new SpecialBlock((
+                    SpecialBlock.Properties
+                            .create(Material.IRON)
+                            .hardnessAndResistance(2.0f,10.0f)
+                            .sound(SoundType.GLASS)
+            )
+            )
+    );
+
+    public static final RegistryObject<SpecialBlock>  BLUE_BLOCK = BLOCKS.register("blue_block", () ->
+            new SpecialBlock((
+                    SpecialBlock.Properties
+                            .create(Material.IRON)
+                            .hardnessAndResistance(2.0f,10.0f)
+                            .sound(SoundType.GLASS)
+            )
+            )
+    );
 
     // register items
     public static final RegistryObject<Item> PI_BLOCK_ITEM = ITEMS.register("pi_block", () ->
@@ -44,4 +74,27 @@ public class RegistryHandler {
                     new Item.Properties().group(ItemGroup.REDSTONE)
             )
     );
+
+    public static final RegistryObject<Item> RED_BLOCK_ITEM = ITEMS.register("red_block", () ->
+            new BlockItem(
+                    RED_BLOCK.get(),
+                    new Item.Properties().group(ItemGroup.REDSTONE)
+            )
+    );
+
+    public static final RegistryObject<Item> GREEN_BLOCK_ITEM = ITEMS.register("green_block", () ->
+            new BlockItem(
+                    GREEN_BLOCK.get(),
+                    new Item.Properties().group(ItemGroup.REDSTONE)
+            )
+    );
+
+    public static final RegistryObject<Item> BLUE_BLOCK_ITEM = ITEMS.register("blue_block", () ->
+            new BlockItem(
+                    BLUE_BLOCK.get(),
+                    new Item.Properties().group(ItemGroup.REDSTONE)
+            )
+    );
+
+
 }

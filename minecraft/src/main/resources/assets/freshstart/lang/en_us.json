@@ -1,3 +1,6 @@
 {
-  "block.freshstart.pi_block": "Pi Block"
+  "block.freshstart.pi_block": "Pi Block",
+  "block.freshstart.red_block": "Red Block",
+  "block.freshstart.green_block": "Green Block",
+  "block.freshstart.blue_block": "Blue Block"
 }
