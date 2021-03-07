@@ -37,7 +37,7 @@ while True:
 	  print("Error fetching player data, status code: " + request.status_code)
 	  exit()
 
-	if !fields in request.json():
+	if not 'fields' in request.json():
 		time.sleep(1)
 		continue
 	
