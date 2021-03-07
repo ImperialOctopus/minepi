@@ -4,6 +4,14 @@ from MinePi import Channels
 import sys
 import RPi.GPIO as GPIO
 import time
+import atexit
+
+
+def exit_handler():
+    GPIO.output(22, GPIO.LOW)
+    GPIO.output(23, GPIO.LOW)
+    GPIO.output(24, GPIO.LOW)
+
 
 if len(sys.argv) != 2:
     print("Usage: client <username>")
@@ -16,6 +24,8 @@ GPIO.setwarnings(False)
 GPIO.setup(22, GPIO.OUT)
 GPIO.setup(23, GPIO.OUT)
 GPIO.setup(24, GPIO.OUT)
+
+atexit.register(exit_handler)
 
 GPIO.output(22, GPIO.HIGH)
 GPIO.output(23, GPIO.HIGH)
