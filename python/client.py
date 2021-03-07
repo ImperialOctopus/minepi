@@ -44,17 +44,17 @@ while True:
 	fields = request.json()['fields']
 
 	# Update LEDs to represent status
-	if "green" in fields and int(fields["green"]) > 0:
+	if "green" in fields and int(fields["green"]["integerValue"]) > 0:
 		GPIO.output(22,GPIO.HIGH)
 	else:
 		GPIO.output(22,GPIO.LOW)
 		
-	if "yellow" in fields and int(fields["yellow"]) > 0:
+	if "yellow" in fields and int(fields["yellow"]["integerValue"]) > 0:
 		GPIO.output(23,GPIO.HIGH)
 	else:
 		GPIO.output(23,GPIO.LOW)
 
-	if "red" in fields and int(fields["red"]) > 0:
+	if "red" in fields and int(fields["red"]["integerValue"]) > 0:
 		GPIO.output(24,GPIO.HIGH)
 	else:
 		GPIO.output(24,GPIO.LOW)
