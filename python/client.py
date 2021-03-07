@@ -31,26 +31,30 @@ while True:
 	print("Polling")
 	
 	# Get player data
-	x = requests.get("https://firestore.googleapis.com/v1/projects/mine-pi/databases/(default)/documents/users/" + username)
+	request = requests.get("https://firestore.googleapis.com/v1/projects/mine-pi/databases/(default)/documents/users/" + username)
 
-	if x.status_code != 200:
-	  print("Error fetching player data")
+	if request.status_code != 200:
+	  print("Error fetching player data, status code: " + request.status_code)
 	  exit()
 
+	if !fields in request.json():
+		time.sleep(1)
+		continue
+	
 	fields = x.json()['fields']
 
 	# Update LEDs to represent status
-	if "green" in fields and fields["green"] > 0:
+	if "green" in fields and int(fields["green"]) > 0:
 		GPIO.output(22,GPIO.HIGH)
 	else:
 		GPIO.output(22,GPIO.LOW)
 		
-	if "yellow" in fields and fields["yellow"] > 0:
+	if "yellow" in fields and int(fields["yellow"]) > 0:
 		GPIO.output(23,GPIO.HIGH)
 	else:
 		GPIO.output(23,GPIO.LOW)
 
-	if "red" in fields and fields["red"] > 0:
+	if "red" in fields and int(fields["red"]) > 0:
 		GPIO.output(24,GPIO.HIGH)
 	else:
 		GPIO.output(24,GPIO.LOW)
