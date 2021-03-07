@@ -1,13 +1,15 @@
 # MinePi
 
-## Minecraft
+Made in 24 hours for Hack the Burgh 2021!
 
-Minecraft mod that adds redstone components to send signals to a Raspberry Pi.
+## /minecraft
 
-## Raspberry Pi
+Minecraft mod that adds a set of redstone components that send their supplied signal strength to a Google Cloud database to be picked up by the Python script.
 
-Program for the Raspberry Pi that controls GPIO output.
+## /python
 
-## Monitor
+Python library that connects to the Google Cloud server to get the state of outputs.
 
-Flutter app that monitors a MinePi instance.
+## /flutter
+
+Flutter app that monitors a MinePi instance. Enter your username in the menu to see the current state of all outputs.
