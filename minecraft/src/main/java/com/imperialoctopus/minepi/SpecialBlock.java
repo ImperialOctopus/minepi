@@ -1,4 +1,4 @@
-package com.imperialoctopus.freshstart;
+package com.imperialoctopus.minepi;
 
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;

@@ -1,11 +1,11 @@
 {
   "parent": "block/cube",
   "textures": {
-    "up": "freshstart:block/pi_top",
-    "down": "freshstart:block/pi_bottom",
-    "east": "freshstart:block/pi_side_green",
-    "west": "freshstart:block/pi_side_green",
-    "north": "freshstart:block/pi_side_green",
-    "south": "freshstart:block/pi_side_green"
+    "up": "minepi:block/pi_top",
+    "down": "minepi:block/pi_bottom",
+    "east": "minepi:block/pi_side_green",
+    "west": "minepi:block/pi_side_green",
+    "north": "minepi:block/pi_side_green",
+    "south": "minepi:block/pi_side_green"
   }
 }
