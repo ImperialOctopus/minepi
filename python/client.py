@@ -27,7 +27,7 @@ GPIO.output(24,GPIO.LOW)
 username = sys.argv[1]
 
 # Poll server once per second
-while true:
+while True:
 	print("Polling")
 	
 	# Get player data
