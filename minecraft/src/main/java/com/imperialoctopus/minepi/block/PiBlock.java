@@ -1,4 +1,4 @@
-package com.imperialoctopus.minepi;
+package com.imperialoctopus.minepi.block;
 
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
@@ -25,7 +25,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 
-public class SpecialBlock extends Block {
+public class PiBlock extends Block {
     private static final int MIN_POWER = 0;
     private static final int MAX_POWER = 15;
     public static final IntegerProperty POWER_LEVEL = IntegerProperty.create("power_level", MIN_POWER, MAX_POWER);
@@ -40,7 +40,7 @@ public class SpecialBlock extends Block {
      * private static final Direction SOUTH = Direction.SOUTH;
      */
 
-    public SpecialBlock(String name, Properties properties) {
+    public PiBlock(String name, Properties properties) {
         super(properties);
         this.name = name;
 

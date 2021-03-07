@@ -1,5 +1,7 @@
 package com.imperialoctopus.minepi;
 
+import com.imperialoctopus.minepi.block.PiBlock;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,16 +26,16 @@ public class RegistryHandler {
         }
 
         // register blocks
-        public static final RegistryObject<SpecialBlock> RED_BLOCK = BLOCKS.register("pi_block_red",
-                        () -> new SpecialBlock("red", (SpecialBlock.Properties.create(Material.IRON)
+        public static final RegistryObject<PiBlock> RED_BLOCK = BLOCKS.register("pi_block_red",
+                        () -> new PiBlock("red", (PiBlock.Properties.create(Material.IRON)
                                         .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS))));
 
-        public static final RegistryObject<SpecialBlock> GREEN_BLOCK = BLOCKS.register("pi_block_green",
-                        () -> new SpecialBlock("green", (SpecialBlock.Properties.create(Material.IRON)
+        public static final RegistryObject<PiBlock> GREEN_BLOCK = BLOCKS.register("pi_block_green",
+                        () -> new PiBlock("green", (PiBlock.Properties.create(Material.IRON)
                                         .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS))));
 
-        public static final RegistryObject<SpecialBlock> YELLOW_BLOCK = BLOCKS.register("pi_block_yellow",
-                        () -> new SpecialBlock("yellow", (SpecialBlock.Properties.create(Material.IRON)
+        public static final RegistryObject<PiBlock> YELLOW_BLOCK = BLOCKS.register("pi_block_yellow",
+                        () -> new PiBlock("yellow", (PiBlock.Properties.create(Material.IRON)
                                         .hardnessAndResistance(2.0f, 10.0f).sound(SoundType.GLASS))));
 
         // register items
