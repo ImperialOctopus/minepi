@@ -20,13 +20,19 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 
 public class SpecialBlock extends Block {
+    private static final int MIN_POWER = 0;
+    private static final int MAX_POWER = 15;
+    public static final IntegerProperty POWER_LEVEL = IntegerProperty.create("power_level", MIN_POWER, MAX_POWER);
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
     private final String name;
 
@@ -40,6 +46,9 @@ public class SpecialBlock extends Block {
     public SpecialBlock(String name, Properties properties) {
         super(properties);
         this.name = name;
+
+        this.setDefaultState(
+                this.getDefaultState().with(POWER_LEVEL, Integer.valueOf(0)).with(LIT, Boolean.valueOf(false)));
     }
 
     /**
@@ -75,7 +84,8 @@ public class SpecialBlock extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState();
+        return this.getDefaultState().with(POWER_LEVEL, Integer.valueOf(0)).with(LIT,
+                Boolean.valueOf(context.getWorld().isBlockPowered(context.getPos())));
     }
 
     // ---- methods to handle changes in state and inform neighbours when necessary
@@ -86,6 +96,7 @@ public class SpecialBlock extends Block {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
         BlockState newBlockState = getBlockStateFromInputs(worldIn, pos, state);
         sendPowerLevel(newBlockState.get(POWER_LEVEL));
+
         final int FLAGS = SetBlockStateFlag.get(SetBlockStateFlag.BLOCK_UPDATE, SetBlockStateFlag.SEND_TO_CLIENTS);
         worldIn.setBlockState(pos, newBlockState, FLAGS);
     }
@@ -98,11 +109,14 @@ public class SpecialBlock extends Block {
     public void neighborChanged(BlockState currentState, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
             boolean isMoving) {
         BlockState newBlockState = getBlockStateFromInputs(worldIn, pos, currentState);
-        if (newBlockState != currentState) {
-            // Send update here.
-            sendPowerLevel(newBlockState.get(POWER_LEVEL));
-            final int FLAGS = SetBlockStateFlag.get(SetBlockStateFlag.BLOCK_UPDATE, SetBlockStateFlag.SEND_TO_CLIENTS);
-            worldIn.setBlockState(pos, newBlockState, FLAGS);
+        if (!worldIn.isRemote) {
+            if (newBlockState != currentState) {
+                // Send update here.
+                sendPowerLevel(newBlockState.get(POWER_LEVEL));
+                final int FLAGS = SetBlockStateFlag.get(SetBlockStateFlag.BLOCK_UPDATE,
+                        SetBlockStateFlag.SEND_TO_CLIENTS);
+                worldIn.setBlockState(pos, newBlockState, FLAGS);
+            }
         }
     }
 
@@ -117,14 +131,11 @@ public class SpecialBlock extends Block {
     // ---------methods related to storing information about the block (which way
     // it's facing, the power level)
 
-    private static final int MIN_POWER = 0;
-    private static final int MAX_POWER = 15;
-    private static final IntegerProperty POWER_LEVEL = IntegerProperty.create("power_level", MIN_POWER, MAX_POWER);
-
     // necessary to define which properties your block use - will also affect the
     // variants listed in the blockstates model file
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(POWER_LEVEL);
+        builder.add(LIT);
     }
 
     /**
@@ -143,7 +154,8 @@ public class SpecialBlock extends Block {
 
         final int power = world.getRedstonePowerFromNeighbors(pos);
 
-        BlockState newBlockState = state.with(POWER_LEVEL, (int) power);
+        BlockState newBlockState = state.with(POWER_LEVEL, (int) power).with(LIT,
+                Boolean.valueOf(world.isBlockPowered(pos)));
 
         return newBlockState;
     }

@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "up": "freshstart:block/pi_top_powered",
+    "down": "freshstart:block/pi_bottom",
+    "east": "freshstart:block/pi_side_red",
+    "west": "freshstart:block/pi_side_red",
+    "north": "freshstart:block/pi_side_red",
+    "south": "freshstart:block/pi_side_red"
+  }
+}
